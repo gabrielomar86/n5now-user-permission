@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: userpermission
+  namespace: default
+  labels:
+    app: userpermission
+spec:
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 2005
+    targetPort: 80
+  selector:
+    app: userpermission

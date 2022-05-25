@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userpermission
+  namespace: default
+  labels:
+    app: userpermission
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: userpermission
+  template:
+    metadata:
+      labels:
+        app: userpermission
+    spec:
+      containers:
+      - name: userpermission
+        image: [IMAGEN-BACKEND-DOCKER-REGISTRY]
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 80
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 80
+        resources:
+          requests:
+            cpu: 1
+            memory: 128Mi
+          limits:
+            cpu: 2
+            memory: 512Mi
