@@ -8,7 +8,7 @@ namespace UserPermission.core.entities
     /// <summary>
     /// Entidad base
     /// </summary>
-    public class EntidadBase<TKey>
+    public class BaseEntity<TKey>
     {
         /// <summary>
         /// Identificador de la entidad

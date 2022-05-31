@@ -39,8 +39,8 @@ namespace UserPermission.api
 
             // Adicionar todas las referencias de los servicios
             services.AddCore();
-            services.AddInfraestructura(cadenaConexion: Configuration.GetConnectionString("DefaultConnection"));
-            services.AddServicios();
+            services.AddInfrastructure(stringConnection: Configuration.GetConnectionString("DefaultConnection"));
+            services.AddServices();
 
             services.AddSwaggerGen(c =>
             {
@@ -80,7 +80,7 @@ namespace UserPermission.api
                 .GetRequiredService<IServiceScopeFactory>()
                 .CreateScope();
 
-            using var context = serviceScope.ServiceProvider.GetService<UserPermissionContexto>();
+            using var context = serviceScope.ServiceProvider.GetService<PermissionContext>();
             context.Database.Migrate();
         }
     }

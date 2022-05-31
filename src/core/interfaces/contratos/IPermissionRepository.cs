@@ -5,7 +5,7 @@ namespace UserPermission.core.interfaces.contratos
     /// <summary>
     /// Repositorio Ejemplo
     /// </summary>
-    public interface IUserPermissionRepositorio : IRepositorioGenerico<UserPermissionEntity>
+    public interface IPermissionRepository : IGenericRepository<PermissionEntity>
     {
 
     }

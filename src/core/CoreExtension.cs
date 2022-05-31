@@ -5,12 +5,12 @@ namespace UserPermission.core
 {
     public static class CoreExtension
     {
-        public static IServiceCollection AddCore(this IServiceCollection servicios)
+        public static IServiceCollection AddCore(this IServiceCollection services)
         {
             //Enable AutoMapper
-            servicios.AddAutoMapper(typeof(UserPermissionMappingProfile));
+            services.AddAutoMapper(typeof(PermissionMappingProfile));
 
-            return servicios;
+            return services;
         }
 
     }

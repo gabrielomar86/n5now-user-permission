@@ -4,7 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UserPermission.core.entities
 {
-    public class UserPermissionEntity : EntidadBase<int>
+    [Table("Permission")]
+    public class PermissionEntity : BaseEntity<int>
     {
         [Required]
         [Column(TypeName = "varchar(100)")]
@@ -15,11 +16,11 @@ namespace UserPermission.core.entities
         public string EmployeeSurname { get; set; }
 
         [Required]
-        [Column(TypeName = "int")]
-        public int PermissionType { get; set; }
+        public int PermissionTypeId { get; set; }
+        public virtual PermissionTypeEntity PermissionType { get; set; }
 
         [Required]
-        public Date PermissionDate { get; set; }
+        public DateTime PermissionDate { get; set; }
 
     }
 }

@@ -6,15 +6,15 @@ namespace UserPermission.infrastructure.data
 {
     public static class InfrastructureExtension
     {
-        public static IServiceCollection AddInfraestructura(this IServiceCollection servicios, string cadenaConexion)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, string stringConnection)
         {
-            servicios.AddScoped<IRepositorioWrapper, RepositorioWrapper>();
+            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
 
-            servicios.AddDbContext<UserPermissionContexto>(
-                x => x.UseSqlite(cadenaConexion)
+            services.AddDbContext<PermissionContext>(
+                x => x.UseSqlServer(stringConnection)
             );
 
-            return servicios;
+            return services;
         }
 
     }

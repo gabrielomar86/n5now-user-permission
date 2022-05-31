@@ -5,11 +5,11 @@ namespace UserPermission.services
 {
     public static class ServiceExtension
     {
-        public static IServiceCollection AddServicios(this IServiceCollection servicios)
+        public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            servicios.AddScoped<IUserPermissionServicio, UserPermissionServicio>();
+            services.AddScoped<IPermissionService, PermissionService>();
 
-            return servicios;
+            return services;
         }
     }
 }
