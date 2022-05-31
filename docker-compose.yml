@@ -1,6 +1,13 @@
 version: "3.5"
 
 services:
+  mssql:
+    build:
+      context: ./ci-cd/docker
+      dockerfile: MSSQLDockerFile
+    container_name: n5now-server-db
+    ports:
+      - 1433:1433
   userpermission:
     build:
       context: ./src
@@ -11,3 +18,30 @@ services:
       - "2003:80"
     environment:
       ASPNETCORE_ENVIRONMENT: Development
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.1
+    environment:
+      - bootstrap.memory_lock=true
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - ELASTIC_PASSWORD=n5elasticsearch
+      - xpack.security.enabled=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    mem_limit: 1g
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.15.1
+    links:
+      - elasticsearch
+    ports:
+      - 5601:5601
+volumes:
+  esdata:
+    driver: local
