@@ -40,13 +40,18 @@ namespace UserPermission.services
         {
             var entity = _repositoryWrapper
                 ._permissionRepository
-                .FindByCondition(x => x.Id == permissionId);
+                .FindByCondition(x => x.Id == permissionId)
+                .FirstOrDefault();
 
-            if (entity == null || !entity.Any())
+            if (entity == null)
                 throw new Exception(notFoundMessage.Replace("[id]", permissionId.ToString()));
 
-            var entityUpdated = _repositoryWrapper._permissionRepository.Update(_mapper.Map<PermissionEntity>(permission));
+            entity.EmployeeForename = permission.EmployeeForename;
+            entity.EmployeeSurname = permission.EmployeeSurname;
+            entity.PermissionTypeId = permission.PermissionTypeId;
+            entity.PermissionDate = permission.PermissionDate;
 
+            var entityUpdated = _repositoryWrapper._permissionRepository.Update(entity);
             return _mapper.Map<PermissionDto>(entityUpdated);
         }
     }

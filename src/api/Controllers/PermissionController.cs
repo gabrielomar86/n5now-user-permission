@@ -24,10 +24,9 @@ namespace UserPermission.api.Controllers
         public IActionResult Get() => Ok(_permissionService.GetPermissions());
 
         [HttpPost]
-        public IActionResult Create([FromBody] PermissionDto permissionDto) => Ok(_permissionService.RequestPermission(permissionDto));
+        public IActionResult Create([FromBody] PermissionDto permissionDto) => Created("", _permissionService.RequestPermission(permissionDto));
 
-        [HttpPost]
-        [Route("{id}")]
+        [HttpPatch("{id}")]
         public IActionResult Update(int id, [FromBody] PermissionDto permissionDto) => Ok(_permissionService.ModifyPermission(id, permissionDto));
 
     }
