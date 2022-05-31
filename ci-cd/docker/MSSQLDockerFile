@@ -1,0 +1,11 @@
+FROM mcr.microsoft.com/mssql/server:2017-latest
+
+WORKDIR /app
+
+# Execute sqlcmd
+ENV ACCEPT_EULA=Y
+ENV SA_PASSWORD=S3cr3t!S3cr3t!
+
+RUN /opt/mssql/bin/sqlservr --accept-eula & sleep 60
+
+EXPOSE 1433
